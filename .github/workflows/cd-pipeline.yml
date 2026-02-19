@@ -30,8 +30,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Atualizar Kubeconfig para EKS
-        run: aws eks update-kubeconfig --name fase4-eks # Ajuste o nome do seu cluster se necessário
-
+        run: aws eks update-kubeconfig --name EKS-FIAP
       - name: Terraform Init
         run: terraform init
 
