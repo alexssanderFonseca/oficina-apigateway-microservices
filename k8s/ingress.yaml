@@ -54,3 +54,10 @@ spec:
                 name: catalogo-catalogo-app-service # Corrigido
                 port:
                   number: 80
+          - path: /pagamentos
+            pathType: Prefix
+            backend:
+              service:
+                name: pagamento-service
+                port:
+                  number: 80
