@@ -1,0 +1,59 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oficina-ingress
+  namespace: oficina-ns
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    # Use caminhos prefixados para roteamento
+    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
+    alb.ingress.kubernetes.io/success-codes: "200"
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /clientes
+            pathType: Prefix
+            backend:
+              service:
+                name: cliente-app-service
+                port:
+                  number: 80
+          - path: /catalogo
+            pathType: Prefix
+            backend:
+              service:
+                name: catalogo-app-service
+                port:
+                  number: 80
+          - path: /orcamentos
+            pathType: Prefix
+            backend:
+              service:
+                name: orcamento-app-service
+                port:
+                  number: 80
+          - path: /ordens-servicos
+            pathType: Prefix
+            backend:
+              service:
+                name: ordem-servico-app-service
+                port:
+                  number: 80
+          - path: /pecas
+            pathType: Prefix
+            backend:
+              service:
+                name: catalogo-app-service
+                port:
+                  number: 80
+          - path: /servicos
+            pathType: Prefix
+            backend:
+              service:
+                name: catalogo-app-service
+                port:
+                  number: 80

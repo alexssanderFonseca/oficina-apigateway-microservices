@@ -1,0 +1,2411 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "OpenAPI definition",
+		"version": "v0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:9090",
+			"description": "Generated server url"
+		}
+	],
+	"tags": [
+		{
+			"name": "Clientes",
+			"description": "Operações relacionadas a clientes"
+		},
+		{
+			"name": "Orçamentos",
+			"description": "Gerenciamento dos orçamentos"
+		},
+		{
+			"name": "Peças e Insumos",
+			"description": "Gerenciamento de peças e insumos"
+		},
+		{
+			"name": "Serviços",
+			"description": "Gerenciamento dos serviços oferecidos"
+		},
+		{
+			"name": "Monitoramento",
+			"description": "Operações relacionadas a métricas e monitoramento da oficina"
+		},
+		{
+			"name": "Ordens de Serviço",
+			"description": "Gerenciamento das ordens de serviço"
+		}
+	],
+	"paths": {
+		"/usuarios": {
+			"post": {
+				"tags": [
+					"auth-controller"
+				],
+				"summary": "Cadastra um novo usuário no sistema",
+				"operationId": "cadastrarUsuario",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UsuarioRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Usuário cadastrado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "Usuário já existe",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/usuarios",
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/servicos": {
+			"get": {
+				"tags": [
+					"Serviços"
+				],
+				"summary": "Listar todos os serviços",
+				"description": "Retorna a lista completa de serviços cadastrados",
+				"operationId": "listar",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Lista de serviços retornada com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"post": {
+				"tags": [
+					"Serviços"
+				],
+				"summary": "Cadastrar serviço",
+				"description": "Cadastra um novo serviço no sistema",
+				"operationId": "cadastrar",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CadastrarServicoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Serviço cadastrado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/pecas": {
+			"get": {
+				"tags": [
+					"Peças e Insumos"
+				],
+				"summary": "Listar todas as peças e insumos",
+				"operationId": "listarTodas",
+				"parameters": [
+					{
+						"name": "pagina",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64",
+							"default": 0
+						}
+					},
+					{
+						"name": "quantidade",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64",
+							"default": 10
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Lista de peças e insumos retornada com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas",
+					"requestParameters": {
+						"integration.request.querystring.pagina": "method.request.querystring.pagina",
+						"integration.request.querystring.quantidade": "method.request.querystring.quantidade",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"post": {
+				"tags": [
+					"Peças e Insumos"
+				],
+				"summary": "Cadastrar nova peça ou insumo",
+				"operationId": "cadastrar_1",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CadastrarPecaInsumoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Peça/insumo cadastrado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos": {
+			"get": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Lista todas as ordens de serviço de forma paginada",
+				"operationId": "listar_1",
+				"parameters": [
+					{
+						"name": "pagina",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64",
+							"default": 0
+						}
+					},
+					{
+						"name": "quantidade",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int64",
+							"default": 10
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Lista de ordens de serviço retornada com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos",
+					"requestParameters": {
+						"integration.request.querystring.pagina": "method.request.querystring.pagina",
+						"integration.request.querystring.quantidade": "method.request.querystring.quantidade",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"post": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Abre uma nova ordem de serviço",
+				"operationId": "criar",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CriarOrdemDeServicoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Ordem de serviço aberta com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos/{id}/finalizacoes": {
+			"post": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Finaliza a execução de uma ordem de serviço",
+				"operationId": "finalizar",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "OS finalizada com sucesso"
+					},
+					"404": {
+						"description": "Ordem de serviço não encontrada"
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/finalizacoes",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos/{id}/execucoes": {
+			"post": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Inicia a execução de uma ordem de serviço após aprovação do orçamento",
+				"operationId": "executar",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ExecutarOrdemServicoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"204": {
+						"description": "Execução da OS iniciada com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Ordem de serviço não encontrada",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"409": {
+						"description": "Orçamento não aprovado ou OS em estado incorreto",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/execucoes",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos/{id}/entregas": {
+			"post": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Registra a entrega do veículo ao cliente",
+				"operationId": "entregar",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Veículo entregue com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Ordem de serviço não encontrada",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/entregas",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos/{id}/diagnosticos": {
+			"post": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Inicia o diagnóstico de uma OS",
+				"operationId": "iniciarDiagnostico",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Diagnostico iniciado com sucesso"
+					},
+					"404": {
+						"description": "Ordem de serviço não encontrada"
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/diagnosticos",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos/{id}/diagnosticos/finalizacoes": {
+			"post": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Finaliza o diagnóstico de uma OS, informando peças e serviços necessários",
+				"operationId": "finalizarDiagnostico",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FinalizarDiagnosticoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Diagnóstico finalizado e orçamento gerado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Ordem de serviço não encontrada",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/diagnosticos/finalizacoes",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/orcamentos": {
+			"post": {
+				"tags": [
+					"Orçamentos"
+				],
+				"summary": "Criar novo orçamento",
+				"description": "Cria um novo orçamento com peças e serviços",
+				"operationId": "criarOrcamento",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CriarOrcamentoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Orçamento criado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/orcamentos/{id}/recusados": {
+			"post": {
+				"tags": [
+					"Orçamentos"
+				],
+				"summary": "Recusar orçamento",
+				"description": "Marca o orçamento como recusado",
+				"operationId": "recusarOrcamento",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do orçamento",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Orçamento recusado com sucesso"
+					},
+					"404": {
+						"description": "Orçamento não encontrado"
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}/recusados",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/orcamentos/{id}/aceitos": {
+			"post": {
+				"tags": [
+					"Orçamentos"
+				],
+				"summary": "Aceitar orçamento",
+				"description": "Marca o orçamento como aceito",
+				"operationId": "aceitarOrcamento",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do orçamento",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Orçamento aceito com sucesso"
+					},
+					"404": {
+						"description": "Orçamento não encontrado"
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}/aceitos",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/logins": {
+			"post": {
+				"tags": [
+					"auth-controller"
+				],
+				"summary": "Autentica um usuário e retorna um token JWT",
+				"operationId": "login",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AuthRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Autenticação bem-sucedida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Credenciais inválidas",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/logins",
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/clientes": {
+			"post": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Cadastra um novo cliente",
+				"operationId": "cadastrar_2",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CadastrarClienteRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Cliente cadastrado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/clientes/{id}/veiculos": {
+			"post": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Adiciona um veículo a um cliente existente",
+				"operationId": "adicionarVeiculo",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AdicionarDadosVeiculoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Veículo adicionado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cliente não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}/veiculos",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/servicos/{id}": {
+			"get": {
+				"tags": [
+					"Serviços"
+				],
+				"summary": "Buscar serviço por ID",
+				"description": "Retorna os detalhes de um serviço específico",
+				"operationId": "buscar",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do serviço",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Serviço encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Serviço não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"delete": {
+				"tags": [
+					"Serviços"
+				],
+				"summary": "Deletar serviço",
+				"description": "Remove um serviço pelo seu ID",
+				"operationId": "deletar",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do serviço",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Serviço deletado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Serviço não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "DELETE",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"patch": {
+				"tags": [
+					"Serviços"
+				],
+				"summary": "Atualizar serviço",
+				"description": "Atualiza os dados de um serviço existente",
+				"operationId": "atualizar",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do serviço",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AtualizarServicoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Serviço atualizado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Serviço não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "PATCH",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/pecas/{id}": {
+			"get": {
+				"tags": [
+					"Peças e Insumos"
+				],
+				"summary": "Buscar peça/insumo por ID",
+				"operationId": "buscarPorId",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Peça/insumo encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Peça/insumo não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"delete": {
+				"tags": [
+					"Peças e Insumos"
+				],
+				"summary": "Deletar peça ou insumo",
+				"operationId": "deletar_1",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Peça/insumo deletado com sucesso"
+					},
+					"404": {
+						"description": "Peça/insumo não encontrado"
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "DELETE",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"patch": {
+				"tags": [
+					"Peças e Insumos"
+				],
+				"summary": "Atualizar peça ou insumo",
+				"operationId": "atualizar_1",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AtualizarPecaInsumoRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Peça/insumo atualizado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Peça/insumo não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "PATCH",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/clientes/{id}": {
+			"get": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Busca um cliente por ID",
+				"operationId": "buscar_1",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Cliente encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cliente não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"delete": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Deleta um cliente por ID",
+				"operationId": "deletar_2",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Cliente deletado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cliente não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "DELETE",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			},
+			"patch": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Atualiza os dados de um cliente",
+				"operationId": "atualizar_2",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AtualizarClienteRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Cliente atualizado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Requisição inválida",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cliente não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "PATCH",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/ordens-servicos/{id}": {
+			"get": {
+				"tags": [
+					"Ordens de Serviço"
+				],
+				"summary": "Busca uma ordem de serviço por ID",
+				"operationId": "buscar_2",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Ordem de serviço encontrada",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Ordem de serviço não encontrada",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/orcamentos/{id}": {
+			"get": {
+				"tags": [
+					"Orçamentos"
+				],
+				"summary": "Buscar orçamento por ID",
+				"description": "Retorna os detalhes do orçamento",
+				"operationId": "buscarOrcamento",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do orçamento",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Orçamento encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Orçamento não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/orcamentos/{id}/envios": {
+			"get": {
+				"tags": [
+					"Orçamentos"
+				],
+				"summary": "Enviar orçamento em PDF",
+				"description": "Gera e envia o orçamento em formato PDF para download",
+				"operationId": "enviarOrcamento",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID do orçamento",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "PDF do orçamento gerado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Orçamento não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}/envios",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/monitoramentos/execucoes": {
+			"get": {
+				"tags": [
+					"Monitoramento"
+				],
+				"summary": "Calcula o tempo médio de execução de todos os serviços finalizados",
+				"operationId": "getTempoMedioExecucaoServicos",
+				"parameters": [
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Cálculo retornado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TempoMedioExecucaoResponse"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/monitoramentos/execucoes",
+					"requestParameters": {
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/clientes/{id}/ordensServicos": {
+			"get": {
+				"tags": [
+					"Clientes"
+				],
+				"summary": "Lista o status de todas as ordens de serviço de um cliente",
+				"operationId": "statusByCliente",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Authorization",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Status das ordens de serviço retornado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Cliente não encontrado",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}/ordensServicos",
+					"requestParameters": {
+						"integration.request.path.id": "method.request.path.id",
+						"integration.request.header.Authorization": "method.request.header.Authorization"
+					},
+					"httpMethod": "GET",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"UsuarioRequest": {
+				"type": "object",
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"CadastrarServicoRequest": {
+				"type": "object",
+				"description": "Dados para cadastro do serviço",
+				"properties": {
+					"nome": {
+						"type": "string",
+						"minLength": 1
+					},
+					"descricao": {
+						"type": "string",
+						"minLength": 1
+					},
+					"preco": {
+						"type": "number"
+					},
+					"duracaoEstimada": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"categoria": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": [
+					"categoria",
+					"descricao",
+					"duracaoEstimada",
+					"nome",
+					"preco"
+				]
+			},
+			"CadastrarPecaInsumoRequest": {
+				"type": "object",
+				"properties": {
+					"nome": {
+						"type": "string",
+						"minLength": 1
+					},
+					"descricao": {
+						"type": "string",
+						"minLength": 1
+					},
+					"codigoFabricante": {
+						"type": "string",
+						"minLength": 1
+					},
+					"marca": {
+						"type": "string",
+						"minLength": 1
+					},
+					"quantidadeEstoque": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"precoCusto": {
+						"type": "number"
+					},
+					"precoVenda": {
+						"type": "number"
+					},
+					"categoria": {
+						"type": "string",
+						"minLength": 1
+					},
+					"ativo": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"ativo",
+					"categoria",
+					"codigoFabricante",
+					"descricao",
+					"marca",
+					"nome",
+					"precoCusto",
+					"precoVenda"
+				]
+			},
+			"CriarOrdemDeServicoRequest": {
+				"type": "object",
+				"properties": {
+					"veiculoId": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"clienteId": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"pecasInsumos": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemPecaInsumoRequest"
+						}
+					},
+					"servicos": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				},
+				"required": [
+					"clienteId",
+					"veiculoId"
+				]
+			},
+			"ItemPecaInsumoRequest": {
+				"type": "object",
+				"properties": {
+					"idPecaInsumo": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"qtd": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"ExecutarOrdemServicoRequest": {
+				"type": "object",
+				"properties": {
+					"orcamentoId": {
+						"type": "string",
+						"format": "uuid"
+					}
+				}
+			},
+			"FinalizarDiagnosticoRequest": {
+				"type": "object",
+				"properties": {
+					"idPecasNecessarias": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemPeca"
+						}
+					},
+					"idServicosNecessarios": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				}
+			},
+			"ItemPeca": {
+				"type": "object",
+				"properties": {
+					"idPeca": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"qtd": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"CriarOrcamentoRequest": {
+				"type": "object",
+				"description": "Dados para criação do orçamento",
+				"properties": {
+					"cpfCnpjCliente": {
+						"type": "string"
+					},
+					"veiculoId": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"pecas": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/PecaOrcamentoRequest"
+						}
+					},
+					"servicosIds": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				},
+				"required": [
+					"cpfCnpjCliente",
+					"veiculoId"
+				]
+			},
+			"PecaOrcamentoRequest": {
+				"type": "object",
+				"properties": {
+					"pecaId": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"quantidade": {
+						"type": "integer",
+						"format": "int32",
+						"minimum": 1
+					}
+				},
+				"required": [
+					"pecaId"
+				]
+			},
+			"AuthRequest": {
+				"type": "object",
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"CadastrarClienteRequest": {
+				"type": "object",
+				"properties": {
+					"nome": {
+						"type": "string",
+						"minLength": 1
+					},
+					"sobrenome": {
+						"type": "string",
+						"minLength": 1
+					},
+					"cpfCnpj": {
+						"type": "string",
+						"minLength": 1
+					},
+					"email": {
+						"type": "string",
+						"minLength": 1
+					},
+					"telefone": {
+						"type": "string",
+						"minLength": 1
+					},
+					"endereco": {
+						"$ref": "#/components/schemas/EnderecoRequest"
+					}
+				},
+				"required": [
+					"cpfCnpj",
+					"email",
+					"endereco",
+					"nome",
+					"sobrenome",
+					"telefone"
+				]
+			},
+			"EnderecoRequest": {
+				"type": "object",
+				"properties": {
+					"rua": {
+						"type": "string",
+						"minLength": 1
+					},
+					"numero": {
+						"type": "string",
+						"minLength": 1
+					},
+					"bairro": {
+						"type": "string",
+						"minLength": 1
+					},
+					"cidade": {
+						"type": "string",
+						"minLength": 1
+					},
+					"cep": {
+						"type": "string",
+						"minLength": 1
+					},
+					"uf": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": [
+					"bairro",
+					"cep",
+					"cidade",
+					"numero",
+					"rua",
+					"uf"
+				]
+			},
+			"AdicionarDadosVeiculoRequest": {
+				"type": "object",
+				"properties": {
+					"placa": {
+						"type": "string",
+						"minLength": 1
+					},
+					"cor": {
+						"type": "string",
+						"minLength": 1
+					},
+					"marca": {
+						"type": "string",
+						"minLength": 1
+					},
+					"modelo": {
+						"type": "string",
+						"minLength": 1
+					},
+					"ano": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": [
+					"ano",
+					"cor",
+					"marca",
+					"modelo",
+					"placa"
+				]
+			},
+			"AtualizarServicoRequest": {
+				"type": "object",
+				"description": "Dados para atualização do serviço",
+				"properties": {
+					"preco": {
+						"type": "number"
+					},
+					"ativo": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"ativo",
+					"preco"
+				]
+			},
+			"AtualizarPecaInsumoRequest": {
+				"type": "object",
+				"properties": {
+					"qtd": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"precoCusto": {
+						"type": "number"
+					},
+					"precoVenda": {
+						"type": "number"
+					},
+					"ativa": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"ativa",
+					"precoCusto",
+					"precoVenda",
+					"qtd"
+				]
+			},
+			"AtualizarClienteRequest": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"telefone": {
+						"type": "string"
+					},
+					"endereco": {
+						"$ref": "#/components/schemas/EnderecoAtualizarRequest"
+					}
+				}
+			},
+			"EnderecoAtualizarRequest": {
+				"type": "object",
+				"properties": {
+					"rua": {
+						"type": "string",
+						"minLength": 1
+					},
+					"numero": {
+						"type": "string",
+						"minLength": 1
+					},
+					"bairro": {
+						"type": "string",
+						"minLength": 1
+					},
+					"cep": {
+						"type": "string",
+						"minLength": 1
+					},
+					"cidade": {
+						"type": "string",
+						"minLength": 1
+					},
+					"uf": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"required": [
+					"bairro",
+					"cep",
+					"cidade",
+					"numero",
+					"rua",
+					"uf"
+				]
+			},
+			"TempoMedioExecucaoResponse": {
+				"type": "object",
+				"properties": {
+					"tempoMedioEmMinutos": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}
+			}
+		}
+	}
+}
