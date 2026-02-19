@@ -77,7 +77,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/usuarios",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/usuarios",
 					"httpMethod": "POST",
 					"type": "http_proxy",
 					"passthroughBehavior": "when_no_match",
@@ -116,7 +116,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/servicos",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -176,7 +176,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/servicos",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -237,7 +237,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/pecas",
 					"requestParameters": {
 						"integration.request.querystring.pagina": "method.request.querystring.pagina",
 						"integration.request.querystring.quantidade": "method.request.querystring.quantidade",
@@ -298,7 +298,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/pecas",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -359,7 +359,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos",
 					"requestParameters": {
 						"integration.request.querystring.pagina": "method.request.querystring.pagina",
 						"integration.request.querystring.quantidade": "method.request.querystring.quantidade",
@@ -420,7 +420,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -466,7 +466,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/finalizacoes",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/finalizacoes",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -547,7 +547,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/execucoes",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/execucoes",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -608,7 +608,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/entregas",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/entregas",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -655,7 +655,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/diagnosticos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/diagnosticos",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -726,7 +726,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/diagnosticos/finalizacoes",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos/{id}/diagnosticos/finalizacoes",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -789,7 +789,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/orcamentos",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -837,7 +837,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}/recusados",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/orcamentos/{id}/recusados",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -886,7 +886,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}/aceitos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/orcamentos/{id}/aceitos",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -938,7 +938,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/logins",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/logins",
 					"httpMethod": "POST",
 					"type": "http_proxy",
 					"passthroughBehavior": "when_no_match",
@@ -996,7 +996,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/clientes",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -1076,7 +1076,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}/veiculos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/clientes/{id}/veiculos",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1139,7 +1139,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/servicos/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1200,7 +1200,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/servicos/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1281,7 +1281,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/servicos/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/servicos/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1342,7 +1342,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/pecas/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1387,7 +1387,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/pecas/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1466,7 +1466,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/pecas/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/pecas/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1527,7 +1527,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/clientes/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1586,7 +1586,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/clientes/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1665,7 +1665,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/clientes/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1726,7 +1726,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/ordens-servicos/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/ordens-servicos/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1789,7 +1789,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/orcamentos/{id}",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1852,7 +1852,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/orcamentos/{id}/envios",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/orcamentos/{id}/envios",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"
@@ -1894,7 +1894,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/monitoramentos/execucoes",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/monitoramentos/execucoes",
 					"requestParameters": {
 						"integration.request.header.Authorization": "method.request.header.Authorization"
 					},
@@ -1954,7 +1954,7 @@
 					}
 				},
 				"x-amazon-apigateway-integration": {
-					"uri": "http://afacbd5f7c39544ed98de0d7e66fca46-1432715962.us-east-1.elb.amazonaws.com/clientes/{id}/ordensServicos",
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/clientes/{id}/ordensServicos",
 					"requestParameters": {
 						"integration.request.path.id": "method.request.path.id",
 						"integration.request.header.Authorization": "method.request.header.Authorization"

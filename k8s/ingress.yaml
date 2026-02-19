@@ -4,14 +4,11 @@ metadata:
   name: oficina-ingress
   namespace: oficina-ns
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    # Use caminhos prefixados para roteamento
-    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
-    alb.ingress.kubernetes.io/success-codes: "200"
+    # O NGINX não precisa de permissões IAM no pod para funcionar
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
-  ingressClassName: alb
+  ingressClassName: nginx
   rules:
     - http:
         paths:
