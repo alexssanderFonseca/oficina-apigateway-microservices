@@ -16,41 +16,41 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: cliente-app-service
+                name: cliente-cliente-app-service # Corrigido
                 port:
                   number: 80
           - path: /catalogo
             pathType: Prefix
             backend:
               service:
-                name: catalogo-app-service
+                name: catalogo-catalogo-app-service # Corrigido
                 port:
                   number: 80
           - path: /orcamentos
             pathType: Prefix
             backend:
               service:
-                name: orcamento-app-service
+                name: orcamento-orcamento-app-service # Corrigido
                 port:
                   number: 80
           - path: /ordens-servicos
             pathType: Prefix
             backend:
               service:
-                name: ordem-servico-app-service
+                name: ordem-servico-ordem-servico-app-service # Corrigido
                 port:
                   number: 80
           - path: /pecas
             pathType: Prefix
             backend:
               service:
-                name: catalogo-app-service
+                name: catalogo-catalogo-app-service # Corrigido
                 port:
                   number: 80
           - path: /servicos
             pathType: Prefix
             backend:
               service:
-                name: catalogo-app-service
+                name: catalogo-catalogo-app-service # Corrigido
                 port:
                   number: 80
