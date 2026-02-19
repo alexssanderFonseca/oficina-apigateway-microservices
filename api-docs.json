@@ -34,6 +34,10 @@
 		{
 			"name": "Ordens de Serviço",
 			"description": "Gerenciamento das ordens de serviço"
+		},
+		{
+			"name": "Pagamentos",
+			"description": "Integração com Mercado Pago e AWS"
 		}
 	],
 	"paths": {
@@ -1965,6 +1969,87 @@
 					"connectionType": "INTERNET"
 				}
 			}
+		},
+		"/v1/pagamentos": {
+			"post": {
+				"tags": [
+					"Pagamentos"
+				],
+				"summary": "Criar um novo pagamento",
+				"operationId": "criarPagamento",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePaymentRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Pagamento criado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/v1/pagamentos",
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
+		},
+		"/v1/webhooks/mercadopago": {
+			"post": {
+				"tags": [
+					"Pagamentos"
+				],
+				"summary": "Receber notificação do Mercado Pago",
+				"parameters": [
+					{
+						"name": "x-signature",
+						"in": "header",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MPWebhookNotification"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"x-amazon-apigateway-integration": {
+					"uri": "http://a3c0f5516ab8b40f8a31b8e048f0e2b6-87244207.us-east-1.elb.amazonaws.com/v1/webhooks/mercadopago",
+					"requestParameters": {
+						"integration.request.header.x-signature": "method.request.header.x-signature"
+					},
+					"httpMethod": "POST",
+					"type": "http_proxy",
+					"passthroughBehavior": "when_no_match",
+					"connectionType": "INTERNET"
+				}
+			}
 		}
 	},
 	"components": {
@@ -2397,15 +2482,46 @@
 					"uf"
 				]
 			},
-			"TempoMedioExecucaoResponse": {
-				"type": "object",
-				"properties": {
-					"tempoMedioEmMinutos": {
-						"type": "integer",
-						"format": "int64"
-					}
-				}
-			}
-		}
-	}
-}
+			                        "TempoMedioExecucaoResponse": {
+			                                "type": "object",
+			                                "properties": {
+			                                        "tempoMedioEmMinutos": {
+			                                                "type": "integer",
+			                                                "format": "int64"
+			                                        }
+			                                }
+			                        },
+			                                                "MPWebhookNotification": {
+			                                                        "type": "object",
+			                                                        "properties": {
+			                                                                "action": { "type": "string" },
+			                                                                "api_version": { "type": "string" },
+			                                                                "data": {
+			                                                                        "type": "object",
+			                                                                        "properties": {
+			                                                                                "id": { "type": "string" }
+			                                                                        }
+			                                                                },
+			                                                                "date_created": { "type": "string" },
+			                                                                "id": { "type": "object" },
+			                                                                "live_mode": { "type": "boolean" },
+			                                                                "type": { "type": "string" },
+			                                                                "user_id": { "type": "string" }
+			                                                        }
+			                                                },
+			                                                "CreatePaymentRequest": {
+			                                                        "type": "object",
+			                                                        "required": [
+			                                                                "amount",
+			                                                                "description",
+			                                                                "external_reference"
+			                                                        ],
+			                                                        "properties": {
+			                                                                "amount": { "type": "number" },
+			                                                                "description": { "type": "string" },
+			                                                                "external_reference": { "type": "string" }
+			                                                        }
+			                                                }
+			                                        }
+			                                }
+			                        }
